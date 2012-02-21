@@ -1,9 +1,8 @@
 # This is just some sample code where I benchmarked a few things
-
 require 'benchmark'
 
 def karel(inputs)
-  numbers = inputs 
+  numbers = inputs.dup #
   numbers.sort!
   duplicates = []
   numbers[0..-2].each_index{|i|
@@ -15,13 +14,13 @@ def karel(inputs)
 end
 
 def notary(*inputs)
-  numbers = *inputs
+  numbers = *inputs.dup
   numbers.uniq!
   numbers.inject(:+)
 end
 
 def notary_obli_dup(numbers)
-  unique = numbers.uniq
+  unique = numbers.dup.uniq
   duplicators = subtract_n_from_u(numbers, unique)
   duplicators.each do |d|
     unique.delete(d)
@@ -30,13 +29,15 @@ def notary_obli_dup(numbers)
 end
 
 def subtract_n_from_u(numbers, unique)
+  numbers = numbers.dup
   unique.each do |u|
     numbers.slice!(numbers.index(u))
   end
   return numbers # duplicators
 end
 
-def my_uniq(numbers)
+def my_uniq(in_var)
+  numbers = in_var.dup
   numbers.sort!
   for i in 0..numbers.size()-2
     if numbers[i] == numbers[i+1]
