@@ -37,14 +37,14 @@ def subtract_n_from_u(numbers, unique)
 end
 
 def my_uniq(numbers)
-    numbers.sort!
-    for i in 0..numbers.size()-2
-      if numbers[i] == numbers[i+1]
-        numbers[i] = nil
-      end 
-    end
-    numbers.compact!
-    numbers.inject(:+)
+  numbers.sort!
+  for i in 0..numbers.size()-2
+    if numbers[i] == numbers[i+1]
+      numbers[i] = nil
+    end 
+  end
+  numbers.compact!
+  numbers.inject(:+)
 end
 
 
@@ -92,8 +92,12 @@ end
 example_array = [1,2,4,5,7,1,2,4,1,5,6]
 puts "Example Array:   #{example_array}"
 puts 
-puts "Result:  #{my_uniq(example_array)} and #{notary_obli_dup(example_array)}"
+puts "Result A: #{karel(example_array)}" 
+puts "Result B: #{notary_obli_dup(example_array)}"
 
+puts "Example Array:   #{example_array}"
+
+Process.exit
 
 #puts "Speed for ruby sort:"
 #puts test_karel example_array
