@@ -36,6 +36,19 @@ def subtract_n_from_u(numbers, unique)
   return numbers # duplicators
 end
 
+def my_uniq(numbers)
+    numbers.sort!
+    for i in 0..numbers.size()-2
+      if numbers[i] == numbers[i+1]
+        numbers[i] = nil
+      end 
+    end
+    numbers.compact!
+    numbers.inject(:+)
+end
+
+
+
 def test_karel(numbers=[1,2,4,5,7,1,2,4,1,5,6])
   time = Benchmark.measure do
     2000000.times do
@@ -66,10 +79,26 @@ def test_notary_obli_dup(numbers)
   time
 end
 
-example_array = [1,2,2,3]
+def test_karel_uniq(numbers)
+  time = Benchmark.measure do
+    2000000.times do
+      numbers = numbers
+      my_uniq(numbers)
+    end
+  end
+  time
+end
 
-puts "Speed for ruby sort:"
-puts test_karel example_array
+example_array = [1,2,4,5,7,1,2,4,1,5,6]
+puts "Example Array:   #{example_array}"
+puts 
+puts "Result:  #{my_uniq(example_array)} and #{notary_obli_dup(example_array)}"
+
+
+#puts "Speed for ruby sort:"
+#puts test_karel example_array
+puts "Speed test for uniq with sort"
+puts test_karel_uniq example_array
 
 puts "Speed for ruby unique obliterate:"
 puts test_notary_obli_dup example_array
